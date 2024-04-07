@@ -1,24 +1,21 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const DB_URI = `mongodb://localhost:27017/Product-Peak`;
+const MONGODB_URI = `mongodb://localhost:27017/Product-Peak`;
 
-const connectDB = () => {
-  mongoose.connect(DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    keepAlive: true
-  });
+const { DB_NAME } = process.env; 
 
-  const db = mongoose.connection;
-
-  db.on("error", (err) => {
-    console.error("Error de conexión a la base de datos:", err);
-  });
-
-  db.once("open", () => {
-    console.log("Conexión exitosa a la base de datos");
-  });
-
+const dbConnection = async () => {
+  try {
+    await mongoose.connect(`${MONGODB_URI}/${DB_NAME}`);
+    console.log('[INFO] MongoDB is connected');
+  } catch (error) {
+    console.log(error);
+    throw new Error('[ERROR] It is not possible to initialize MongoDB connection');
+  }
 };
 
-module.exports = connectDB;
+module.exports = {
+  connectDB: dbConnection
+};
+
+
