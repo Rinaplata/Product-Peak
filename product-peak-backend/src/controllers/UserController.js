@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 
 const createUser = async (req, res = response) => {
-  const { name, email, password } = req.body
+  const { username, email, password, bio, avatar } = req.body;
 
   const secret = 'HolaRina..';
 
@@ -25,7 +25,7 @@ const createUser = async (req, res = response) => {
       });
     }
 
-    user = new User({ name, email, password });
+    user = new User({ username, email, password, bio, avatar });
 
     await user.save();
 
@@ -33,7 +33,7 @@ const createUser = async (req, res = response) => {
       ok: true,
       msg: 'registered',
       user: {
-        id: user.id, email: user.email
+        id: user.id, email: user.email, 
       },
       token
     });
@@ -76,7 +76,7 @@ const loginUser = async (req, res = response, next) => {
     })
   }
 
-  jwt.verify(token, 'shhhhh', (error, decoded) => {
+  jwt.verify(token, 'HolaRina', (error, decoded) => {
     if (error) {
       return res.status(403).json({
         ok: false,

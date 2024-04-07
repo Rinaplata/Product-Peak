@@ -13,6 +13,8 @@ router.post(
     check('username', 'Username is mandatory').not().isEmpty(),
     check('email', 'Email is mandatory').isEmail(),
     check('password', 'Password min length is 6').isLength({ min: 6 }),
+    check('bio', 'Bio min length is 1000').isLength({ max: 1000 }),
+    check('avatar', 'Avatar is mandatory').not().isEmpty(),
     validateFields
   ],
   createUser

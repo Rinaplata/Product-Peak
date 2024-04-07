@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json());
 
 // app routes
-app.use('/api/v1', require('./routes/user') );
+app.use('/api/v1', require('./routes/User') );
 
 app.listen(3000, () => {
   console.log(`SERVER RUNNING`);
