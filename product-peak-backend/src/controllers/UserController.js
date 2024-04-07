@@ -3,11 +3,10 @@ const User = require('../models/User')
 
 const jwt = require('jsonwebtoken');
 
+const secret = process.env.TOKEN_SECRET;
 
 const createUser = async (req, res = response) => {
   const { username, email, password, bio, avatar } = req.body;
-
-  const secret = 'HolaRina..';
 
   const token = jwt.sign({
     email, password
@@ -54,9 +53,7 @@ const loginUser = async (req, res = response, next) => {
 
   const user = await User.findOne({ email });
 
-  let data = null;
-
-  if (!user) {
+  if (!user || user.password != password) {
     return res.status(400).json({
       ok: false,
       error: {
@@ -65,49 +62,12 @@ const loginUser = async (req, res = response, next) => {
     });
   }
 
-  const token = req.headers.authorization
-
-  if (!token){
-    return res.status(401).json({
-      ok: false,
-      error: {
-        message: 'Missing Token'
-      }
-    })
-  }
-
-  jwt.verify(token, 'HolaRina', (error, decoded) => {
-    if (error) {
-      return res.status(403).json({
-        ok: false,
-        error: {
-          message: 'Invalid Token'
-        }
-      })
-    };
-    data = decoded
-    next();
-  })
-
-
-  try {
-    res.status(200).json({
-      ok: true,
-      uid: user.id,
-      email: user.email,
-      data: data
+  const token = jwt.sign({ userId: user._id }, secret, {
+    expiresIn: '1h',
     });
-
-  } catch (error) {
-    console.error('[ERROR]', error);
-
-    res.status(500).json({
-      ok: false,
-      error: {
-        message: 'Something went worng, please contact to admin'
-      }
-    });
-  }
+  
+    res.status(200).json({ token });
+  
 }
 
 const renewToken = (req, res = response) => {
