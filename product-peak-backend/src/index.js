@@ -4,6 +4,10 @@ const { connectDB } = require('./database/db');
 
 const app = express();
 
+// se usa para leer el archivo .env
+const dotenv = require('dotenv');
+dotenv.config();
+
 // DB 
 
 connectDB();
@@ -12,8 +16,8 @@ connectDB();
 app.use(express.json());
 
 // app routes
-app.use('/api/v1', require('./routes/User') );
+app.use('/api/v1', require('./routes/UserRoutes') );
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`SERVER RUNNING`);
 });
