@@ -3,6 +3,7 @@
 
 # Integrantes
 - [Rina Plata ](https://github.com/Rinaplata)
+- [Andres de la Hoz ](https://github.com/eldelahoz)
 
 # Tecnología en que se Desarrolló
 - NodeJS v18.19.1

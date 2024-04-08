@@ -1,5 +1,8 @@
 const express = require('express');
 const { connectDB } = require('./database/db');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = require('./swagger');
+const swaggerjsdoc = require('swagger-jsdoc')
 
 
 const app = express();
@@ -15,9 +18,11 @@ connectDB();
 // Parsing body payload
 app.use(express.json());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerjsdoc(swaggerOptions), { explorer: true }));
 // app routes
 app.use('/api/v1', require('./routes/UserRoutes') );
 
 app.listen(process.env.PORT, () => {
   console.log(`SERVER RUNNING`);
 });
+
