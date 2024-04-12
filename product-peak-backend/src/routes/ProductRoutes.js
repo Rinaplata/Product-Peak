@@ -1,8 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 
-const { createProduct } = require("../controllers/ProductController");
-const { createProductValidator } = require("../validators/ProductValidator");
+const {
+  createProduct,
+  modifyProduct,
+} = require("../controllers/ProductController");
+const {
+  createProductValidator,
+  modifyProductValidator,
+} = require("../validators/ProductValidator");
 const { reporterResult } = require("../validators/ValidatorResult");
 const verifyToken = require("../middlewares/authJWT");
 
@@ -13,6 +19,14 @@ router.post(
   createProductValidator(),
   reporterResult,
   createProduct
+);
+// Modify Product
+router.put(
+  "/:productId",
+  verifyToken,
+  modifyProductValidator(),
+  reporterResult,
+  modifyProduct
 );
 
 module.exports = router;

@@ -1,6 +1,5 @@
 const { response } = require("express");
 const Product = require("../models/Product");
-const User = require("../models/User");
 
 const createProduct = async (req, res = response) => {
   const { name, description, url, tags } = req.body;
@@ -36,4 +35,47 @@ const createProduct = async (req, res = response) => {
   }
 };
 
-module.exports = { createProduct };
+const modifyProduct = async (req, res = response) => {
+  const { name, description, url, tags } = req.body;
+  const filter = { _id: req.params.productId, userId: res.userId };
+  try {
+    const product = await Product.findOne(filter);
+    if (!product) {
+      return res.status(404).json({
+        ok: true,
+        error: {
+          message: "Product Not Found",
+        },
+        product: {
+          name: name,
+        },
+      });
+    }
+    const productToModify = { name, description, url, tags };
+    // Eliminar parametros vacios
+    Object.keys(productToModify).forEach(
+      (k) =>
+        productToModify[k] === "" ||
+        (productToModify[k] === undefined && delete productToModify[k])
+    );
+
+    await Product.findOneAndUpdate(filter, productToModify);
+
+    return res.status(201).json({
+      ok: true,
+      error: {
+        message: "Product Modify",
+      },
+      productToModify,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      error: {
+        message: "Something went worng, please contact to admin",
+      },
+    });
+  }
+};
+
+module.exports = { createProduct, modifyProduct };
