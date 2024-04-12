@@ -1,87 +1,88 @@
-const { response } = require('express');
-const User = require('../models/User')
-
-const jwt = require('jsonwebtoken');
+const { response } = require("express");
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 const secret = process.env.TOKEN_SECRET;
 
 const createUser = async (req, res = response) => {
   const { username, email, password, bio, avatar } = req.body;
 
-  const token = jwt.sign({
-    email, password
-  }, secret, { expiresIn: '1h' });
-
   try {
     let user = await User.findOne({ email });
-
     if (user) {
       return res.status(400).json({
         ok: false,
         error: {
-          message: 'User already exists'
-        }
+          message: "User already exists",
+        },
       });
     }
-
-    user = new User({ username, email, password, bio, avatar });
+    const passwordEncr = await bcrypt.hash(password, 10);
+    user = new User({ username, email, password: passwordEncr, bio, avatar });
 
     await user.save();
 
     res.json({
       ok: true,
-      msg: 'registered',
+      msg: "Registered",
       user: {
-        id: user.id, email: user.email, 
+        id: user.id,
+        email: user.email,
       },
-      token
     });
   } catch (error) {
-    console.error('[ERROR]', error);
+    console.error("[ERROR]", error);
 
     res.status(500).json({
       ok: false,
       error: {
-        message: 'Something went worng, please contact to admin'
-      }
-    })
+        message: "Something went worng, please contact to admin",
+      },
+    });
   }
 };
 
-const loginUser = async (req, res = response, next) => {
-  const { email, password } = req.body
+const loginUser = async (req, res = response) => {
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
 
-  if (!user || user.password != password) {
-    return res.status(400).json({
+  // Comparacion de contrasegna con la encriptacion
+  const passwordCompare = await bcrypt.compare(password, user.password);
+  if (!passwordCompare) {
+    return res.status(401).json({
       ok: false,
       error: {
-        message: 'Wrong Credentials'
-      }
+        message: "Wrong Credentials",
+      },
     });
   }
-
   const token = jwt.sign({ userId: user._id }, secret, {
-    expiresIn: '1h',
-    });
-  
-    res.status(200).json({ token });
-  
-}
+    expiresIn: "1h",
+  });
+
+  res.status(200).json({
+    ok: true,
+    error: {
+      message: "",
+    },
+    token,
+  });
+};
 
 const renewToken = (req, res = response) => {
   const { token } = req.body;
 
   res.json({
     ok: true,
-    msg: 'renew',
-    token: token
+    msg: "renew",
+    token: token,
   });
 };
 
 module.exports = {
   createUser,
   loginUser,
-  renewToken
+  renewToken,
 };
