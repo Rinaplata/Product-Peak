@@ -10,14 +10,19 @@ const {
   signUpValidator,
   logInValidator,
 } = require("../validators/UserValidator");
+const { reporterResult } = require("../validators/ValidatorResult");
 const { validateFields } = require("../middlewares/validateFields");
 
 // Create a new user
-router.post("/signUp", signUpValidator(), createUser);
+router.post("/signUp", [signUpValidator(), reporterResult], createUser);
 
 // login
 
-router.post("/logIn", [logInValidator(), validateFields], loginUser);
+router.post(
+  "/logIn",
+  [logInValidator(), reporterResult, validateFields],
+  loginUser
+);
 
 router.get("/renew", renewToken);
 
