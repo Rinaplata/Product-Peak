@@ -23,7 +23,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerjsdoc(swaggerOption
 // app routes
 app.use('/api/v1', require('./routes/UserRoutes') );
 app.use('/api/v1', require('./routes/CommentRoutes') );
-app.use('/api/v1', require('./routes/RetingRoutes') );
+app.use('/api/v1', require('./routes/RatingRoutes') );
 
 app.listen(PORT, () => {
   console.log(`SERVER RUNNING`);

@@ -22,10 +22,11 @@ const createComment = async (req, res = response ) => {
 };
 
 const getAllComment = async (req, res = response ) => {
-  const productId = req.params.productId;
+  const { productId  } = req.body;
+
   try {
-    const reviews = await Comment.find({ productId });
-    if (!reviews || reviews.length === 0) {
+    const comment = await Comment.find({ productId });
+    if (!comment || comment.length === 0) {
       return res
         .status(404)
         .json({ success: false, message: "No Comments found for this product" });
@@ -35,7 +36,7 @@ const getAllComment = async (req, res = response ) => {
       .json({
         success: true,
         message: "Comments found for this product",
-        reviews,
+        comment,
       });
   } catch (error) {
     res.status(500).json({ success: false, message: "Internal server error" });

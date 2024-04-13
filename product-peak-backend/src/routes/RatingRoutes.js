@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 
 
-const { createRating } = require('../controllers/RatingController');
+const { createRating, getAllRating } = require('../controllers/RatingController');
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
 
