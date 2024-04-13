@@ -16,7 +16,7 @@ const ProductSchema = Schema({
     required: true,
   },
   tags: {
-    type: String,
+    type: Array,
   },
   userId: {
     type: Schema.Types.ObjectId,
