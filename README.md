@@ -10,6 +10,13 @@
 # Tecnología en que se Desarrolló
 
 - NodeJS v18.19.1
+  - express
+  - express-validator
+  - jwt
+  - swagger
+  - dotenv
+  - bcrypt
+- MongoDB
 
 # Estructura del proyecto
 
