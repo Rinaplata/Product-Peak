@@ -2,16 +2,16 @@ const { response } = require("express");
 const Rating = require("../models/Rating");
 
 const createRating = async (req, res = response) => {
-  const { productId, userId, rating } = req.body;
+  const { productId, userId, rating: ratingValue } = req.body;
 
   try {
-    const Rating = new Comment({ productId, userId, rating });
-    await Rating.save();
+    const rating = new Rating({ productId, userId, rating: ratingValue });
+    await rating.save();
 
     res.status(201).json({
       success: true,
-      message: "Comment created successfully",
-      comment,
+      message: "Rating created successfully",
+      rating,
     });
   } catch (error) {
     console.error(error);
@@ -23,7 +23,7 @@ const getAllRating = async (req, res = response) => {
   const productId = req.params.productId;
 
   try {
-    const ratings = await ProductRating.find({ productId });
+    const ratings = await Rating.find({ productId });
 
     if (ratings.length === 0) {
       return res

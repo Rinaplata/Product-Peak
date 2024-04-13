@@ -11,11 +11,16 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3001/api/v1",
+        url: "http://localhost:3000/api/v1",
       },
     ],
   },
-  apis: [`${__dirname}/routes/UserRoutes.js`],
+  apis: [
+    `${__dirname}/routes/UserRoutes.js`,
+    `${__dirname}/routes/ProductRoutes.js`,
+    `${__dirname}/routes/CommentRoutes.js`,
+    `${__dirname}/routes/RatingRoutes.js`,
+  ],
 };
 
 module.exports = swaggerOptions;
