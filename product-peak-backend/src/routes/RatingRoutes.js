@@ -1,22 +1,24 @@
-const { Schema, model } = require('mongoose');
+const { Router } = require('express');
+const router = Router();
 
-const ratingSchema = new Schema({
-    productId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true
-    },
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    rating: {
-        type: Number,
-        required: true,
-        min: 1,
-        max: 5
-    }
-}, { timestamps: true });
 
-module.exports = model('ProductRating', ratingSchema);
+const { createRating } = require('../controllers/RatingController');
+const { check } = require('express-validator');
+const { validateFields } = require('../middlewares/validateFields');
+
+// Create a new Comment 
+router.post(
+    '//rating', 
+    [
+      check('productId', 'Product id is mandatory').not().isEmpty(),
+      check('userId', 'User id is mandatory').not().isEmpty(),
+      check('rating', 'rating is mandatory').not().isEmpty().isInt({ min: 1, max: 5 }),
+      validateFields
+    ],
+    createRating
+  );
+
+  router.get('/:productId/rating', getAllRating);
+
+  
+module.exports = router;
