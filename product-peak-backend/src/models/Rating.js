@@ -19,4 +19,4 @@ const RatingSchema= new Schema({
     }
 }, { timestamps: true });
 
-module.exports = model('ProductRating', RatingSchema);
+module.exports = model('Rating', RatingSchema);

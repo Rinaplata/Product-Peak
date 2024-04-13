@@ -42,7 +42,7 @@ const { validateFields } = require('../middlewares/validateFields');
  */
 
 router.post(
-    '//rating', 
+    '/rating', 
     [
       check('productId', 'Product id is mandatory').not().isEmpty(),
       check('userId', 'User id is mandatory').not().isEmpty(),
@@ -54,7 +54,7 @@ router.post(
 
 /**
  * @swagger
- * /rating/{productId}/rating:
+ * /{productId}/rating:
  *   get:
  *     summary: Obtener todas las calificaciones de un producto.
  *     description: Endpoint para obtener todas las calificaciones de un producto específico.
