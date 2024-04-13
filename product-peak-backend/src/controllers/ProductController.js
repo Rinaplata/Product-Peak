@@ -57,7 +57,7 @@ const modifyProduct = async (req, res = response) => {
       description,
       url,
       tags,
-      updatedAt: Date.now,
+      updatedAt: new Date(),
     };
     // Eliminar parametros vacios
     Object.keys(productToModify).forEach(
@@ -65,7 +65,7 @@ const modifyProduct = async (req, res = response) => {
         productToModify[k] === "" ||
         (productToModify[k] === undefined && delete productToModify[k])
     );
-
+    console.log(productToModify);
     await Product.findOneAndUpdate(filter, productToModify);
 
     return res.status(201).json({
