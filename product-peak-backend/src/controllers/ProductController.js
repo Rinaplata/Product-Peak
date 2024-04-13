@@ -1,5 +1,6 @@
 const { response } = require("express");
 const Product = require("../models/Product");
+const Comment = require("../models/Comment");
 
 const createProduct = async (req, res = response) => {
   const { name, description, url, tags } = req.body;
@@ -138,10 +139,47 @@ const findProductWithComment = async (req, res = response) => {
       });
     }
 
+    const comment = await Comment.findOne({
+      productId: req.params.productId,
+    }).populate("productId");
+
     return res.status(201).json({
       ok: true,
       error: {
         message: "Product With Comments",
+      },
+      product: { comment },
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      error: {
+        message: "Something went worng, please contact to admin",
+      },
+    });
+  }
+};
+
+const findProductWithParameters = async (req, res = response) => {
+  const filter = ({} = req.body);
+  try {
+    const product = await Product.find(filter);
+    if (!product) {
+      return res.status(404).json({
+        ok: false,
+        error: {
+          message: "Product Not Found",
+        },
+        product: {
+          filter,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      error: {
+        message: "Product Found",
       },
       product,
     });
@@ -160,4 +198,5 @@ module.exports = {
   modifyProduct,
   deleteProduct,
   findProductWithComment,
+  findProductWithParameters,
 };

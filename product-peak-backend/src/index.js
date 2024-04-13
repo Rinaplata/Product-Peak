@@ -3,13 +3,12 @@ const { connectDB } = require("./database/db");
 const swaggerUi = require("swagger-ui-express");
 const swaggerOptions = require("./swagger");
 const swaggerjsdoc = require("swagger-jsdoc");
-
 const app = express();
-const PORT = Number.parseInt(process.env.PORT || "3000");
 
 // se usa para leer el archivo .env
 const dotenv = require("dotenv");
 dotenv.config();
+const PORT = Number.parseInt(process.env.PORT || "3000");
 
 // DB
 
@@ -27,8 +26,6 @@ app.use(
 app.use("/api/v1", require("./routes/UserRoutes"));
 app.use("/api/v1", require("./routes/CommentRoutes"));
 app.use("/api/v1", require("./routes/RatingRoutes"));
-app.use("/api/v1", require("./routes/UserRoutes"));
-// routes product
 app.use("/api/v1/products", require("./routes/ProductRoutes"));
 
 app.listen(PORT, () => {
