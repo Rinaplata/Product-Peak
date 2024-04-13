@@ -8,6 +8,11 @@ const swaggerOptions = {
       contact: {
         name: "Rina Plata y Andres de la hoz",
       },
+      servers: [
+        {
+          url: "http://localhost:3000/api/v1",
+        },
+      ],
     },
     apis: [
       `${__dirname}/routes/UserRoutes.js`,
