@@ -15,6 +15,36 @@ const { reporterResult } = require("../validators/ValidatorResult");
 const verifyToken = require("../middlewares/authJWT");
 
 // Create a new product
+/**
+ * @swagger
+ * /productos:
+ *   post:
+ *     summary: Crear un nuevo producto
+ *     tags: [Productos]
+ *     description: Crea un nuevo producto con los detalles proporcionados
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/InputProducto'
+ *     responses:
+ *       '200':
+ *         description: Producto creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Producto'
+ *       '400':
+ *         description: Solicitud incorrecta. Verifica el cuerpo de la solicitud para errores.
+ *       '401':
+ *         description: No autorizado. El usuario debe estar conectado para crear un producto.
+ *       '500':
+ *         description: Error interno del servidor. Algo salió mal en el servidor.
+ */
+
 router.post(
   "",
   verifyToken,
