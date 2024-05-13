@@ -18,7 +18,7 @@ const { reporterResult } = require("../validators/ValidatorResult");
  *   post:
  *     summary: Crear un comentario sobre un producto.
  *     description: Endpoint para que los usuarios puedan dejar un comentario sobre un producto.
- *     tags: [comments]
+ *     tags: [Comments]
  *     requestBody:
  *       required: true
  *       content:
@@ -55,7 +55,7 @@ router.post(
  *   get:
  *     summary: Obtener todos los comentarios de un producto.
  *     description: Endpoint para obtener todos los comentarios de un producto específico.
- *     tags: [comments]
+ *     tags: [Comments]
  *     parameters:
  *       - in: path
  *         name: productId
