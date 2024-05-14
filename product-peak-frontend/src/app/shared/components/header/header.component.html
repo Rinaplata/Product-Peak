@@ -1,1 +1,54 @@
-<p>header works!</p>
+<header class=" header-content p-mb-4 p-py-2 p-shadow-2">
+  <div class="p-d-flex p-jc-between p-ai-center p-px-4">
+    <div class="logo">
+      <a routerLink="/">
+        <img
+          src="../../../../assets/images/logo.png"
+          class="logo-img"
+          alt="Product Peak"
+        />
+      </a>
+      <p class="logo-text">Product Peak</p>
+    </div>
+    <div class="search-bar p-d-flex p-ai-center">
+      <input
+        type="text"
+        class="p-inputtext p-mr-2"
+        placeholder="Search products..."
+      />
+    </div>
+    <!-- Menú de usuario o sesión -->
+    <div class="user-menu p-d-flex p-ai-center">
+      <ng-container>
+        <div class="session-actions">
+          <button type="button" class="white-button p-button button-text">LOGIN</button>
+          <button type="button" class="yellow-button p-button button-text">SIGN UP</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</header>
+
+<!-- <p-menubar class="p-mb-4 p-py-2 p-shadow-2">
+  <ng-template pTemplate="start">
+    <div class="p-d-flex p-ai-center">
+      <a routerLink="/" class="logo">
+      </a>
+      <div class="search-bar p-d-flex p-ai-center">
+        <input type="text" class="p-inputtext p-mr-2" placeholder="Search products...">
+        <button type="button" class="p-button p-button-primary">Search</button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="user-menu p-d-flex p-ai-center">
+      <ng-container>
+        <div class="session-actions">
+          <button type="button" class="p-button p-button-success">Login</button>
+          <button type="button" class="p-button p-button-warning">Register</button>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</p-menubar> -->
+
