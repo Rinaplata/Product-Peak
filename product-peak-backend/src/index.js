@@ -23,9 +23,9 @@ app.use(
   swaggerUi.setup(swaggerjsdoc(swaggerOptions), { explorer: true })
 );
 // app routes
-app.use("/api/v1", require("./routes/UserRoutes"));
-app.use("/api/v1", require("./routes/CommentRoutes"));
-app.use("/api/v1", require("./routes/RatingRoutes"));
+app.use("/api/v1/user", require("./routes/UserRoutes"));
+app.use("/api/v1/comment", require("./routes/CommentRoutes"));
+app.use("/api/v1/rating", require("./routes/RatingRoutes"));
 app.use("/api/v1/products", require("./routes/ProductRoutes"));
 
 app.listen(PORT, () => {
