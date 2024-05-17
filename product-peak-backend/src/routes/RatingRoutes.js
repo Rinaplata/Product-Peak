@@ -1,13 +1,15 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
 
+const {
+  createRating,
+  getAllRating,
+} = require("../controllers/RatingController");
+const { reporterResult } = require("../validators/ValidatorResult");
+const verifyToken = require("../middlewares/authJWT");
+const { createRatingValidator } = require("../validators/RatingValidator");
 
-const { createRating, getAllRating } = require('../controllers/RatingController');
-const { check } = require('express-validator');
-const { validateFields } = require('../middlewares/validateFields');
-
-// Create a new Comment 
-
+// Create a new Comment
 
 /**
  * @swagger
@@ -42,15 +44,12 @@ const { validateFields } = require('../middlewares/validateFields');
  */
 
 router.post(
-    '/rating', 
-    [
-      check('productId', 'Product id is mandatory').not().isEmpty(),
-      check('userId', 'User id is mandatory').not().isEmpty(),
-      check('rating', 'rating is mandatory').not().isEmpty().isInt({ min: 1, max: 5 }),
-      validateFields
-    ],
-    createRating
-  );
+  "",
+  verifyToken,
+  createRatingValidator(),
+  reporterResult,
+  createRating
+);
 
 /**
  * @swagger
@@ -75,7 +74,6 @@ router.post(
  *         description: Error interno del servidor.
  */
 
-  router.get('/:productId/rating', getAllRating);
+router.get("/:productId", getAllRating);
 
-  
 module.exports = router;

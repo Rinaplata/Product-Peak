@@ -5,8 +5,8 @@ const {
   createProduct,
   modifyProduct,
   deleteProduct,
-  findProductWithComment,
   findProductWithParameters,
+  specificProduct,
 } = require("../controllers/ProductController");
 const {
   createProductValidator,
@@ -33,9 +33,9 @@ router.put(
 );
 // Delete Product
 router.delete("/:productId", verifyToken, reporterResult, deleteProduct);
-// Find Product and get with Comments
-router.get("/:productId", verifyToken, reporterResult, findProductWithComment);
 // Fnf product with filters
 router.get("", verifyToken, reporterResult, findProductWithParameters);
+// Specific Products
+router.get("/:productId", verifyToken, reporterResult, specificProduct);
 
 module.exports = router;

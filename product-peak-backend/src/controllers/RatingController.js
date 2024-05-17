@@ -2,10 +2,14 @@ const { response } = require("express");
 const Rating = require("../models/Rating");
 
 const createRating = async (req, res = response) => {
-  const { productId, userId, rating: ratingValue } = req.body;
-
+  const { productId, rating: ratingValue } = req.body;
   try {
-    const rating = new Rating({ productId, userId, rating: ratingValue });
+    const rating = new Rating({
+      productId,
+      userId: res.userId,
+      rating: ratingValue,
+    });
+
     await rating.save();
 
     res.status(201).json({
