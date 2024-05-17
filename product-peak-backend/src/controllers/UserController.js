@@ -12,10 +12,8 @@ const createUser = async (req, res = response) => {
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
-        ok: false,
-        error: {
-          message: "User already exists",
-        },
+        success: false,
+        message: "User already exists",
       });
     }
     const passwordEncr = await bcrypt.hash(password, 10);
@@ -24,8 +22,8 @@ const createUser = async (req, res = response) => {
     await user.save();
 
     res.json({
-      ok: true,
-      msg: "Registered",
+      success: true,
+      message: "Registered",
       user: {
         id: user.id,
         email: user.email,
@@ -35,10 +33,8 @@ const createUser = async (req, res = response) => {
     console.error("[ERROR]", error);
 
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -52,10 +48,8 @@ const loginUser = async (req, res = response) => {
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
     return res.status(401).json({
-      ok: false,
-      error: {
-        message: "Wrong Credentials",
-      },
+      success: false,
+      message: "Wrong Credentials",
     });
   }
   const token = jwt.sign({ userId: user._id }, secret, {
@@ -63,10 +57,8 @@ const loginUser = async (req, res = response) => {
   });
 
   res.status(200).json({
-    ok: true,
-    error: {
-      message: "",
-    },
+    success: true,
+    message: "",
     token,
   });
 };
@@ -75,8 +67,8 @@ const renewToken = (req, res = response) => {
   const { token } = req.body;
 
   res.json({
-    ok: true,
-    msg: "renew",
+    success: true,
+    message: "renew",
     token: token,
   });
 };

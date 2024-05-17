@@ -25,12 +25,13 @@ const getAllComment = async (req, res = response) => {
   try {
     const comment = await Comment.find({ productId });
     if (!comment || comment.length === 0) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No Comments found for this product",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No Comments found for this product",
+        product: {
+          id: productId,
+        },
+      });
     }
     res.status(200).json({
       success: true,

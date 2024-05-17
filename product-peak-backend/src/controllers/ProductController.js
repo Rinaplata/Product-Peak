@@ -16,10 +16,8 @@ const createProduct = async (req, res = response) => {
     await product.save();
 
     return res.status(201).json({
-      ok: true,
-      error: {
-        message: "Product Registered",
-      },
+      success: true,
+      message: "Product Registered",
       product: {
         id: product._id,
         name: product.name,
@@ -28,10 +26,8 @@ const createProduct = async (req, res = response) => {
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -43,10 +39,8 @@ const modifyProduct = async (req, res = response) => {
     const product = await Product.findOne(filter);
     if (!product) {
       return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
+        success: true,
+        message: "Product Not Found",
         product: {
           name: name,
         },
@@ -69,18 +63,14 @@ const modifyProduct = async (req, res = response) => {
     await Product.findOneAndUpdate(filter, productToModify);
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product Modify",
-      },
+      success: true,
+      message: "Product Modify",
       productToModify,
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -91,10 +81,8 @@ const deleteProduct = async (req, res = response) => {
     const product = await Product.findOne(filter);
     if (!product) {
       return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
+        success: true,
+        message: "Product Not Found",
         product: {
           _id: req.params.productId,
         },
@@ -105,20 +93,16 @@ const deleteProduct = async (req, res = response) => {
     await Product.deleteOne(filter);
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product Delete",
-      },
+      success: true,
+      message: "Product Delete",
       product: {
         product,
       },
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -129,10 +113,8 @@ const findProductWithParameters = async (req, res = response) => {
     const product = await Product.find(filter);
     if (!product) {
       return res.status(404).json({
-        ok: false,
-        error: {
-          message: "Product Not Found",
-        },
+        success: false,
+        message: "Product Not Found",
         product: {
           filter,
         },
@@ -140,18 +122,14 @@ const findProductWithParameters = async (req, res = response) => {
     }
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product Found",
-      },
+      success: true,
+      message: "Product Found",
       product,
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -161,10 +139,8 @@ const specificProduct = async (req, res = response) => {
     const product = await Product.findById(req.params.productId);
     if (!product) {
       return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
+        success: true,
+        message: "Product Not Found",
         product: {
           id: req.params.productId,
         },
@@ -212,18 +188,14 @@ const specificProduct = async (req, res = response) => {
     ]);
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product With Comments and Ratings",
-      },
+      success: true,
+      message: "Product With Comments and Ratings",
       product: { productSpecific },
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
