@@ -28,6 +28,9 @@ const getAllComment = async (req, res = response) => {
       return res.status(404).json({
         success: false,
         message: "No Comments found for this product",
+        product: {
+          id: productId,
+        },
       });
     }
     res.status(200).json({

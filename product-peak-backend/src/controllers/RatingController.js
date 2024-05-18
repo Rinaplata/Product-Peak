@@ -3,7 +3,6 @@ const Rating = require("../models/Rating");
 
 const createRating = async (req, res = response) => {
   const { productId, rating: ratingValue } = req.body;
-
   try {
     const rating = new Rating({
       productId,
@@ -30,16 +29,24 @@ const getAllRating = async (req, res = response) => {
     const ratings = await Rating.find({ productId });
 
     if (ratings.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No ratings found for this product" });
+      return res.status(404).json({
+        success: false,
+        message: "No ratings found for this product",
+        product: {
+          id: productId,
+        },
+      });
     }
 
     const totalRatings = ratings.length;
     const totalScore = ratings.reduce((acc, curr) => acc + curr.rating, 0);
     const averageRating = totalScore / totalRatings;
 
-    res.status(200).json({ success: true, averageRating });
+    res.status(200).json({
+      success: true,
+      message: "Ratings found",
+      averageRating,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal server error" });

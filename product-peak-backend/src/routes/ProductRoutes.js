@@ -5,8 +5,9 @@ const {
   createProduct,
   modifyProduct,
   deleteProduct,
-  findProductWithComment,
   findProductWithParameters,
+  specificProduct,
+  findProductsByDate,
 } = require("../controllers/ProductController");
 const {
   createProductValidator,
@@ -61,7 +62,7 @@ const verifyToken = require("../middlewares/authJWT");
  *         description: No autorizado. El usuario debe estar conectado para crear un producto.
  *       '500':
  *         description: Error interno del servidor. Algo salió mal en el servidor.
-*/
+ */
 
 router.post(
   "",
@@ -130,6 +131,7 @@ router.put(
   reporterResult,
   modifyProduct
 );
+router.get("/date", verifyToken, findProductsByDate);
 // Delete Product
 /**
  * @swagger
@@ -173,94 +175,9 @@ router.put(
  */
 
 router.delete("/:productId", verifyToken, reporterResult, deleteProduct);
-// Find Product and get with Comments
-/**
- * @swagger
- * /productos/{productId}:
- *   get:
- *     summary: Buscar un producto con comentarios
- *     tags:
- *       - Products
- *     description: Busca un producto existente según su ID y devuelve detalles del producto junto con sus comentarios asociados
- *     parameters:
- *       - in: path
- *         name: productId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID del producto que se desea buscar
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       '200':
- *         description: Detalles del producto con comentarios
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   description: Indica si la operación fue exitosa
- *                   example: true
- *                 message:
- *                   type: string
- *                   description: Mensaje descriptivo de la operación
- *                   example: Producto encontrado con éxito
- *                 product:
- *                   $ref: '#/components/schemas/ProductoConComentarios'
- *       '401':
- *         description: No autorizado. El usuario debe estar conectado para buscar un producto.
- *       '404':
- *         description: Producto no encontrado. No se encontró un producto con el ID proporcionado.
- *       '500':
- *         description: Error interno del servidor. Algo salió mal en el servidor.
- */
-
-router.get("/:productId", verifyToken, reporterResult, findProductWithComment);
-
-// Buscar productos por filtro
-/**
- * @swagger
- * /productos:
- *   get:
- *     summary: Buscar productos con filtros
- *     tags:
- *       - Products
- *     description: Busca productos según los filtros especificados y devuelve una lista de resultados
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: category
- *         schema:
- *           type: string
- *         description: Categoría del producto a buscar
- *       - in: query
- *         name: name
- *         schema:
- *           type: string
- *         description: Nombre del producto a buscar
- *       - in: query
- *         name: rating
- *         schema:
- *           type: integer
- *         description: Calificación mínima del producto a buscar
- *     responses:
- *       '200':
- *         description: Lista de productos que coinciden con los filtros especificados
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Producto'
- *       '401':
- *         description: No autorizado. El usuario debe estar conectado para buscar productos.
- *       '500':
- *         description: Error interno del servidor. Algo salió mal en el servidor.
- */
-
+// Fnf product with filters
 router.get("", verifyToken, reporterResult, findProductWithParameters);
+// Specific Products
+router.get("/:productId", verifyToken, reporterResult, specificProduct);
 
 module.exports = router;

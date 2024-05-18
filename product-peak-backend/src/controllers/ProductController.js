@@ -1,6 +1,5 @@
 const { response } = require("express");
 const Product = require("../models/Product");
-const Comment = require("../models/Comment");
 
 const createProduct = async (req, res = response) => {
   const { name, description, url, tags } = req.body;
@@ -16,10 +15,8 @@ const createProduct = async (req, res = response) => {
     await product.save();
 
     return res.status(201).json({
-      ok: true,
-      error: {
-        message: "Product Registered",
-      },
+      success: true,
+      message: "Product Registered",
       product: {
         id: product._id,
         name: product.name,
@@ -28,10 +25,8 @@ const createProduct = async (req, res = response) => {
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -43,10 +38,8 @@ const modifyProduct = async (req, res = response) => {
     const product = await Product.findOne(filter);
     if (!product) {
       return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
+        success: true,
+        message: "Product Not Found",
         product: {
           name: name,
         },
@@ -68,19 +61,15 @@ const modifyProduct = async (req, res = response) => {
 
     await Product.findOneAndUpdate(filter, productToModify);
 
-    return res.status(201).json({
-      ok: true,
-      error: {
-        message: "Product Modify",
-      },
+    return res.status(200).json({
+      success: true,
+      message: "Product Modify",
       productToModify,
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -91,10 +80,8 @@ const deleteProduct = async (req, res = response) => {
     const product = await Product.findOne(filter);
     if (!product) {
       return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
+        success: true,
+        message: "Product Not Found",
         product: {
           _id: req.params.productId,
         },
@@ -105,57 +92,16 @@ const deleteProduct = async (req, res = response) => {
     await Product.deleteOne(filter);
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product Delete",
-      },
+      success: true,
+      message: "Product Delete",
       product: {
         product,
       },
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
-    });
-  }
-};
-
-const findProductWithComment = async (req, res = response) => {
-  const filter = { _id: req.params.productId, userId: res.userId };
-  try {
-    const product = await Product.findOne(filter);
-    if (!product) {
-      return res.status(404).json({
-        ok: true,
-        error: {
-          message: "Product Not Found",
-        },
-        product: {
-          id: req.params.productId,
-        },
-      });
-    }
-
-    const comment = await Comment.findOne({
-      productId: req.params.productId,
-    }).populate("productId");
-
-    return res.status(201).json({
-      ok: true,
-      error: {
-        message: "Product With Comments",
-      },
-      product: { comment },
-    });
-  } catch (error) {
-    res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
-      },
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -166,10 +112,8 @@ const findProductWithParameters = async (req, res = response) => {
     const product = await Product.find(filter);
     if (!product) {
       return res.status(404).json({
-        ok: false,
-        error: {
-          message: "Product Not Found",
-        },
+        success: false,
+        message: "Product Not Found",
         product: {
           filter,
         },
@@ -177,18 +121,109 @@ const findProductWithParameters = async (req, res = response) => {
     }
 
     return res.status(200).json({
-      ok: true,
-      error: {
-        message: "Product Found",
-      },
+      success: true,
+      message: "Product Found",
       product,
     });
   } catch (error) {
     res.status(500).json({
-      ok: false,
-      error: {
-        message: "Something went worng, please contact to admin",
+      success: false,
+      message: "Something went worng, please contact to admin",
+    });
+  }
+};
+
+const specificProduct = async (req, res = response) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+    if (!product) {
+      return res.status(404).json({
+        success: true,
+        message: "Product Not Found",
+        product: {
+          id: req.params.productId,
+        },
+      });
+    }
+
+    const productSpecific = await Product.aggregate([
+      { $match: { _id: product._id } },
+      {
+        $lookup: {
+          from: "ratings",
+          localField: "_id",
+          foreignField: "productId",
+          as: "ratings",
+        },
       },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "productId",
+          as: "comments",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          ratings: {
+            _id: 1,
+            userId: 1,
+            rating: 1,
+            createdAt: 1,
+            updatedAt: 1,
+          },
+          comments: {
+            _id: 1,
+            userId: 1,
+            content: 1,
+            createdAt: 1,
+            updatedAt: 1,
+          },
+        },
+      },
+    ]);
+
+    return res.status(200).json({
+      success: true,
+      message: "Product With Comments and Ratings",
+      product: { productSpecific },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went worng, please contact to admin",
+    });
+  }
+};
+
+const findProductsByDate = async (req, res = response) => {
+  const { startDate, endDate } = req.body;
+  try {
+    const product = await Product.find({
+      createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+    });
+    if (!product) {
+      return res.status(404).json({
+        success: true,
+        message: "Product Not Found",
+        product: {
+          id: req.params.productId,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Product Found",
+      product: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went worng, please contact to admin",
     });
   }
 };
@@ -197,6 +232,7 @@ module.exports = {
   createProduct,
   modifyProduct,
   deleteProduct,
-  findProductWithComment,
   findProductWithParameters,
+  specificProduct,
+  findProductsByDate,
 };

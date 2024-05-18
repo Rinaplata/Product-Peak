@@ -1,15 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 
-const verifyToken = require("../middlewares/authJWT");
 const {
   createComment,
   getAllComment,
 } = require("../controllers/CommentController");
 
-const { createCommentValidator } = require("../validators/CommentValidator");
-
 const { reporterResult } = require("../validators/ValidatorResult");
+const verifyToken = require("../middlewares/authJWT");
+const { createCommentValidator } = require("../validators/CommentValidator");
 
 // Create a new Comment
 /**
@@ -18,7 +17,7 @@ const { reporterResult } = require("../validators/ValidatorResult");
  *   post:
  *     summary: Crear un comentario sobre un producto.
  *     description: Endpoint para que los usuarios puedan dejar un comentario sobre un producto.
- *     tags: [Comments]
+ *     tags: [comments]
  *     requestBody:
  *       required: true
  *       content:
@@ -42,7 +41,7 @@ const { reporterResult } = require("../validators/ValidatorResult");
  */
 
 router.post(
-  "/comment",
+  "",
   verifyToken,
   createCommentValidator(),
   reporterResult,
@@ -55,7 +54,7 @@ router.post(
  *   get:
  *     summary: Obtener todos los comentarios de un producto.
  *     description: Endpoint para obtener todos los comentarios de un producto específico.
- *     tags: [Comments]
+ *     tags: [comments]
  *     parameters:
  *       - in: path
  *         name: productId
@@ -71,6 +70,6 @@ router.post(
  *       404:
  *         description: Producto no encontrado.
  */
-router.get("/:productId/Comment", verifyToken, getAllComment);
+router.get("/:productId", getAllComment);
 
 module.exports = router;

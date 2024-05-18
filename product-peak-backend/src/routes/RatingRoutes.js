@@ -1,15 +1,13 @@
 const { Router } = require("express");
 const router = Router();
 
-const verifyToken = require("../middlewares/authJWT");
 const {
   createRating,
   getAllRating,
 } = require("../controllers/RatingController");
-
-const { createRatingValidator } = require("../validators/RatingValidator");
-
 const { reporterResult } = require("../validators/ValidatorResult");
+const verifyToken = require("../middlewares/authJWT");
+const { createRatingValidator } = require("../validators/RatingValidator");
 
 // Create a new Comment
 
@@ -46,7 +44,7 @@ const { reporterResult } = require("../validators/ValidatorResult");
  */
 
 router.post(
-  "/rating",
+  "",
   verifyToken,
   createRatingValidator(),
   reporterResult,
@@ -76,6 +74,6 @@ router.post(
  *         description: Error interno del servidor.
  */
 
-router.get("/:productId/rating", verifyToken, getAllRating);
+router.get("/:productId", getAllRating);
 
 module.exports = router;
