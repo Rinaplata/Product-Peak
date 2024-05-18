@@ -7,6 +7,7 @@ const {
   deleteProduct,
   findProductWithParameters,
   specificProduct,
+  findProductsByDate,
 } = require("../controllers/ProductController");
 const {
   createProductValidator,
@@ -31,6 +32,7 @@ router.put(
   reporterResult,
   modifyProduct
 );
+router.get("/date", verifyToken, findProductsByDate);
 // Delete Product
 router.delete("/:productId", verifyToken, reporterResult, deleteProduct);
 // Fnf product with filters

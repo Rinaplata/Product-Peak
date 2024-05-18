@@ -24,6 +24,7 @@ app.use(
 );
 // app routes
 app.use("/api/v1/user", require("./routes/UserRoutes"));
+app.use("/api/v1/follow/", require("./routes/FollowRoutes"));
 app.use("/api/v1/comment", require("./routes/CommentRoutes"));
 app.use("/api/v1/rating", require("./routes/RatingRoutes"));
 app.use("/api/v1/products", require("./routes/ProductRoutes"));

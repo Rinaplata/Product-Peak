@@ -1,5 +1,4 @@
 const { response } = require("express");
-const mongoose = require("mongoose");
 const Product = require("../models/Product");
 
 const createProduct = async (req, res = response) => {
@@ -200,10 +199,40 @@ const specificProduct = async (req, res = response) => {
   }
 };
 
+const findProductsByDate = async (req, res = response) => {
+  const { startDate, endDate } = req.body;
+  try {
+    const product = await Product.find({
+      createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+    });
+    if (!product) {
+      return res.status(404).json({
+        success: true,
+        message: "Product Not Found",
+        product: {
+          id: req.params.productId,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Product Found",
+      product: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went worng, please contact to admin",
+    });
+  }
+};
+
 module.exports = {
   createProduct,
   modifyProduct,
   deleteProduct,
   findProductWithParameters,
   specificProduct,
+  findProductsByDate,
 };
