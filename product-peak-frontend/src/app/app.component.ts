@@ -4,8 +4,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { HomeComponent } from './features/home/home.component';
 import { ProductDetailsComponent } from './features/products/product-details/product-details.component';
-
-
+import { LoginComponent } from './auth/login/login.component';
 
 
 @Component({
@@ -16,7 +15,8 @@ import { ProductDetailsComponent } from './features/products/product-details/pro
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    LoginComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
