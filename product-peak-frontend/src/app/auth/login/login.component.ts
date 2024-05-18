@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   imports: [
     DialogModule,
-    DialogModule
+    DialogModule,
   ]
 })
 export class AppModule { }
@@ -19,11 +21,12 @@ export class AppModule { }
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DividerModule, DialogModule],
   providers: [MessageService, DialogService]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({});
+  visible = true
 
   constructor(
     private fb: FormBuilder,
@@ -53,4 +56,5 @@ export class LoginComponent implements OnInit {
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
+
 }

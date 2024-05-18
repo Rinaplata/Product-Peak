@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+
 
 
 @Component({
