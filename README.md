@@ -34,8 +34,20 @@ https://github.com/Rinaplata/Product-Peak.git
 npm install
 ```
 
-3. **Ejecutar la aplicacion local:**
+3. **Creacion archivo .env:**
 
 ```bash
+PORT=
+TOKEN_SECRET =
+```
+
+4. **Ejecutar la aplicacion local:**
+
+```bash
+cd product-peak-backend
 npm run runDev
 ```
+
+5. **Ruta de Swagger:**
+
+http://localhost:3000/api-docs/#/

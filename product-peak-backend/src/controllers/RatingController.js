@@ -9,7 +9,6 @@ const createRating = async (req, res = response) => {
       userId: res.userId,
       rating: ratingValue,
     });
-
     await rating.save();
 
     res.status(201).json({
