@@ -1,4 +1,4 @@
-<header class=" header-content p-mb-4 p-py-2 p-shadow-2">
+<header class="header-content p-mb-4 p-py-2 p-shadow-2">
   <div class="p-d-flex p-jc-between p-ai-center p-px-4">
     <div class="logo">
       <a routerLink="/">
@@ -17,11 +17,10 @@
         placeholder="Search products..."
       />
     </div>
-    <!-- Menú de usuario o sesión -->
     <div class="user-menu p-d-flex p-ai-center">
       <ng-container>
         <div class="session-actions">
-          <button type="button" class="white-button p-button button-text">LOGIN</button>
+          <button type="button" class="white-button p-button button-text" ((click))="openModalLogin(loginSelected)">LOGIN</button>
           <button type="button" class="yellow-button p-button button-text">SIGN UP</button>
         </div>
       </ng-container>
@@ -29,4 +28,8 @@
   </div>
 </header>
 
-
+<app-login
+  [login]="loginSelected"
+  [visible]="visibleLogin"
+  (closeEmit)="onCloseModalLogin()"
+></app-login>
