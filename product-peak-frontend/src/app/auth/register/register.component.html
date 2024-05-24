@@ -1,1 +1,25 @@
-<p>register works!</p>
+
+<div class="register-form">
+  <div class="flex flex-column align-items-center justify-content-center gap-3 py-5">
+    <div class="flex flex-column justify-content-end align-items-start gap-4">
+      <label for="username" class="w-8rem">Username</label>
+      <input pInputText id="username" type="text" class="input-adjusted" />
+    </div>
+    <div class="flex flex-column justify-content-end align-items-start gap-4">
+      <label for="email" class="w-8rem">Email</label>
+      <input pInputText id="email" type="text" class="input-adjusted" />
+    </div>
+    <div class="flex flex-column justify-content-end align-items-start gap-4">
+      <label for="password" class="w-8rem">Password</label>
+      <input pInputText id="password" type="password" class="input-adjusted" />
+    </div>
+    <div class="flex flex-column justify-content-end align-items-start gap-4">
+      <label for="confirmPassword" class="w-8rem">Confirm Password</label>
+      <input pInputText id="confirmPassword" type="password" class="input-adjusted" />
+    </div>
+    <button type="button" class="yellow-button p-button button-text">
+      REGISTER
+    </button>
+    <a (click)="openLogin()" class="register-link">Already have an account? Login</a>
+  </div>
+</div>

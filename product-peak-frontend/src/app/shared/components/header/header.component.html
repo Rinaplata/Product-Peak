@@ -27,7 +27,12 @@
           >
             LOGIN
           </button>
-          <button type="button" class="yellow-button p-button button-text">
+          <button type="button"
+           class="yellow-button
+           p-button
+           button-text"
+           (click)="showDialogRegister()"
+           >
             SIGN UP
           </button>
         </div>
@@ -40,7 +45,7 @@
   header="LOGIN"
   [modal]="true"
   [(visible)]="visible"
-  [style]="{ width: '25rem',  height: '30rem' }"
+  [style]="{ width: '25rem',  height: '40rem' }"
 >
   <app-login
     [login]="loginSelected"
@@ -48,3 +53,17 @@
     (closeEmit)="onCloseModalLogin()"
   ></app-login>
 </p-dialog>
+
+<p-dialog
+  header="REGISTER"
+  [modal]="true"
+  [(visible)]="visibleModal"
+  [style]="{ width: '28rem',  height: '50rem' }"
+>
+  <app-register
+  [register]="registerSelected"
+  [visibleRegister]=" visibleSignUp"
+  (closeEmit)="onCloseModalRegister()"
+  ></app-register>
+</p-dialog>
+
