@@ -1,16 +1,37 @@
-import { Component, input } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+import { LoginComponent } from '../../../auth/login/login.component';
+import { DialogModule } from 'primeng/dialog';
+import { Dialog } from 'primeng/dialog';
 
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, MenubarModule],
+  imports: [ButtonModule, MenubarModule, LoginComponent, DialogModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  @ViewChild('loginComponent') loginComponent!: LoginComponent;
+  visibleLogin: boolean = false;
 
+  loginSelected: any = {};
+
+  visible: boolean = false;
+
+  showDialog() {
+      this.visible = true;
+  }
+
+  onCloseModalLogin(){
+    this.visibleLogin = false;
+  }
+
+  openModalLogin(loginSelected: any){
+    this.loginSelected = loginSelected;
+    this.visibleLogin = true;
+  }
 }
