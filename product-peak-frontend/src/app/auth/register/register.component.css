@@ -1,0 +1,69 @@
+:root {
+  --common-label-color: #000000; /* Ajusta el color según tus necesidades */
+}
+
+.register-form label,
+.register-form .forgot-password-link,
+.register-form .register-link {
+  color: var(--common-label-color);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.register-form .flex {
+  width: 100%;
+}
+
+.register-form label {
+  margin-bottom: 0.5rem;
+}
+
+.register-form .flex-column {
+  margin-bottom: 1.5rem;
+}
+
+.register-form .w-12rem {
+  width: 12rem;
+}
+
+.register-form .forgot-password-link,
+.register-form .register-link {
+  margin-top: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
+.register-form .forgot-password-link {
+  margin-bottom: 0.5rem;
+}
+
+.yellow-button:hover {
+  background-color: #f5c330;
+}
+
+.yellow-button {
+  background-color: #f5c330;
+  border-color: #f5c330;
+  border: 1px solid #f5c330;
+  color: white;
+  font-size: 14px;
+  margin-left: 127px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.register-form .flex-column input {
+  width: 100%;
+  position: relative;
+  top: 8px;
+}
