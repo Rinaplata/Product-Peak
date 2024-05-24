@@ -7,6 +7,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [CommonModule, ButtonModule, DividerModule, DialogModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, ButtonModule, DividerModule, DialogModule, FormsModule, ReactiveFormsModule, InputTextModule],
   providers: [MessageService, DialogService]
 })
 export class LoginComponent implements OnInit {

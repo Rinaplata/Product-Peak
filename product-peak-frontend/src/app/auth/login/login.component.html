@@ -1,5 +1,5 @@
-<p-dialog header="Login" [(visible)]="visible" [style]="{ width: '25rem' }" (onHide)="closeModal()">
-  <form [formGroup]="loginForm">
+
+<!--   <form [formGroup]="loginForm">
     <div class="flex flex-column md:flex-row">
       <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
         <div class="flex flex-wrap justify-content-center align-items-center gap-2">
@@ -10,38 +10,31 @@
           <label class="w-6rem">Password</label>
           <input pInputText id="password" type="password" class="w-12rem" formControlName="password" />
         </div>
-        <p-button label="Login" icon="pi pi-user" styleClass="w-10rem mx-auto" (click)="onSubmit()"></p-button>
-      </div>
-      <div class="w-full md:w-2">
-        <p-divider layout="vertical" styleClass="hidden md:flex">
-          <b>OR</b>
-        </p-divider>
-        <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'">
-          <b>OR</b>
-        </p-divider>
-      </div>
-      <div class="w-full md:w-5 flex align-items-center justify-content-center py-5">
-        <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success w-10rem"></p-button>
+        <button type="button" class="yellow-button p-button button-text">
+          LOGIN
+        </button>
       </div>
     </div>
-  </form>
-</p-dialog>
+  </form> -->
+  <div class="login-form">
+    <div class="flex flex-column align-items-center justify-content-center gap-3 py-30">
+      <div class="flex flex-column justify-content-center align-items-center gap-4">
+        <label for="username" class="w-8rem">Username</label>
+        <input pInputText id="username" type="text" class="w-12rem" />
+      </div>
+      <div class="flex flex-column justify-content-center align-items-center gap-4">
+        <label for="password" class="w-12rem">Password</label>
+        <input pInputText id="password" type="password" class="w-12rem" />
+      </div>
+      <button type="button" class="yellow-button p-button button-text">
+        LOGIN
+      </button>
+      <a routerLink="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+      <a routerLink="/register" class="register-link">Don't have an account? Register</a>
+    </div>
+  </div>
 
-<!-- <p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-    <span class="p-text-secondary block mb-5">Update your information.</span>
-    <div class="flex align-items-center gap-3 mb-3">
-        <label for="username" class="font-semibold w-6rem">Username</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">Email</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex justify-content-end gap-2">
-        <p-button label="Cancel" severity="secondary" (click)="visible = false" />
-        <p-button label="Save" (click)="visible = false" />
-    </div>
-</p-dialog> -->
+
 
 
 

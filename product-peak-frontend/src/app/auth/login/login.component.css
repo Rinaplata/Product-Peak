@@ -1,51 +1,77 @@
+:root {
+  --common-label-color: #000000; /* Ajusta el color según tus necesidades */
+}
+
+.login-form label,
+.login-form .forgot-password-link,
+.login-form .register-link {
+  color: var(--common-label-color);
+}
+
 .login-form {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-control {
+.login-form .flex {
   width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
 }
 
-.btn {
-  width: 100%;
-  padding: 5px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.login-form label {
+  margin-bottom: 0.5rem;
+}
+
+.login-form .flex-column {
+  margin-bottom: 1.5rem;
+}
+
+.login-form .w-12rem {
+  width: 12rem;
+}
+
+.login-form .w-10rem {
+  width: 10rem;
+}
+
+.login-form .forgot-password-link,
+.login-form .register-link {
+  margin-top: 1rem;
+  text-decoration: underline;
   cursor: pointer;
+  display: block;
+  text-align: center;
 }
 
-.btn:hover {
-  background-color: #0069d9;
+.login-form .forgot-password-link {
+  margin-bottom: 0.5rem;
 }
 
-.login-button {
+.yellow-button:hover {
   background-color: #f5c330;
+}
+
+.yellow-button {
+  background-color: #f5c330;
+  border-color: #f5c330;
+  border: 1px solid #f5c330;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-size: 11px;
+  margin-left: 127px;
+  font-family: sans-serif;
   text-transform: uppercase;
-  font-weight: bold;
-  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
   transition: background-color 0.3s;
 }
 
-.login-button:hover {
-  background-color: #e0b12d;
+.login-form[_ngcontent-ng-c112101211] .w-12rem[_ngcontent-ng-c112101211] {
+  width: 19rem;
+  display: flex;
 }
 
+.login-form[_ngcontent-ng-c112101211] .flex[_ngcontent-ng-c112101211] {
+  width: 100%;
+}
