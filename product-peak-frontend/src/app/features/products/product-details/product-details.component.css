@@ -15,8 +15,6 @@
 }
 
 .details-content {
-  width: 1070px;
-  padding: 60px 0;
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
@@ -156,4 +154,33 @@
 
 ul {
   list-style: none;
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.sidebar-card {
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+.p-card {
+  margin-bottom: 16px;
+}
+
+.published-products img, .top-rated-products img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.published-products h4, .top-rated-products h4 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.published-products p, .top-rated-products p {
+  font-size: 0.9rem;
+  color: #666;
 }

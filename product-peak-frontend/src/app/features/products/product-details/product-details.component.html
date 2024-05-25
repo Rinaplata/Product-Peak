@@ -8,7 +8,9 @@
   <div class="content">
     <div class="details-content">
       <p-card>
-        <div class="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6">
+        <div
+          class="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6"
+        >
           <div class="flex w-full">
             <ul class="w-full">
               <li
@@ -34,7 +36,9 @@
                   </span>
                 </div>
                 <div class="ml-2">
-                  <h3 class="text-base font-bold text-gray-900">{{ product.title }}</h3>
+                  <h3 class="text-base font-bold text-gray-900">
+                    {{ product.title }}
+                  </h3>
                   <p class="text-f13 font-normal">
                     <a href="javascript:void(0)">{{ product.description }}</a>
                   </p>
@@ -43,7 +47,9 @@
                       class="inline-flex items-center mt-3 border border-grey-100 rounded pl-2 pb-1 pt-1 pr-2"
                     >
                       <i class="pi pi-comments" style="font-size: 1rem"></i>
-                      <p class="text-f11 uppercase ml-1 font-medium">{{ product.comments }}</p>
+                      <p class="text-f11 uppercase ml-1 font-medium">
+                        {{ product.comments }}
+                      </p>
                     </span>
                   </div>
                 </div>
@@ -55,12 +61,12 @@
     </div>
 
     <aside class="sidebar">
-      <p-card>
+      <div class="sidebar-card">
         <app-published-products></app-published-products>
-      </p-card>
-      <p-card>
+      </div>
+      <div class="sidebar-card">
         <app-top-rated-products></app-top-rated-products>
-      </p-card>
+      </div>
     </aside>
   </div>
 </div>
