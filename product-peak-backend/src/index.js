@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const { connectDB } = require("./database/db");
 const swaggerUi = require("swagger-ui-express");
 const swaggerOptions = require("./swagger");
 const swaggerjsdoc = require("swagger-jsdoc");
 const app = express();
+
+app.use(cors());
 
 // se usa para leer el archivo .env
 const dotenv = require("dotenv");
