@@ -1,25 +1,63 @@
-
+<p-messages></p-messages>
 <div class="register-form">
-  <div class="flex flex-column align-items-center justify-content-center gap-3 py-3">
-    <div class="flex flex-column justify-content-end align-items-start">
-      <label for="username" class="w-8rem">Username</label>
-      <input pInputText id="username" type="text" class="input-adjusted" />
-    </div>
-    <div class="flex flex-column justify-content-end align-items-start gap-4">
-      <label for="email" class="w-8rem">Email</label>
-      <input pInputText id="email" type="text" class="input-adjusted" />
-    </div>
-    <div class="flex flex-column justify-content-end align-items-start gap-4">
-      <label for="password" class="w-8rem">Password</label>
-      <input pInputText id="password" type="password" class="input-adjusted" />
-    </div>
-    <div class="flex flex-column justify-content-end align-items-start gap-4">
-      <label for="confirmPassword" class="w-8rem">Confirm Password</label>
-      <input pInputText id="confirmPassword" type="password" class="input-adjusted" />
-    </div>
-    <button type="button" class="yellow-button p-button button-text">
-      REGISTER
-    </button>
-    <a (click)="openLogin()" class="register-link">Already have an account? Login</a>
-  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-column align-items-center justify-content-center gap-3 py-3">
+      <div class="flex flex-column justify-content-end align-items-start">
+        <label for="username" class="w-8rem">Username</label>
+        <input
+          pInputText
+          id="username"
+          formControlName="username"
+          type="text"
+          class="input-adjusted"
+        />
+      </div>
+      <div class="flex flex-column justify-content-end align-items-start gap-4">
+        <label for="email" class="w-8rem">Email</label>
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          type="email"
+          class="input-adjusted"
+        />
+      </div>
+      <div class="flex flex-column justify-content-end align-items-start gap-4">
+        <label for="password" class="w-8rem">Password</label>
+        <input
+          pInputText
+          id="password"
+          formControlName="password"
+          type="password"
+          class="input-adjusted"
+        />
+      </div>
+      <div class="flex flex-column justify-content-end align-items-start gap-4">
+        <label for="descripcionBio" class="w-8rem">Descripcion para tu Biografía</label>
+        <input
+          pInputText
+          id="descripcionBio"
+          formControlName="bio"
+          type="text"
+          class="input-adjusted"
+        />
+      </div>
+      <div class="flex flex-column justify-content-end align-items-start gap-4">
+        <label for="url" class="w-8rem">URL de tu Avatar</label>
+        <input
+          pInputText
+          id="url"
+          formControlName="avatar"
+          type="url"
+          class="input-adjusted"
+        />
+      </div>
+      <button type="submit" class="yellow-button p-button button-text">
+        REGISTER
+      </button>
+      <a (click)="openLogin()" class="register-link"
+        >Already have an account? Login</a
+      >
+  </form>
+  
 </div>
+
