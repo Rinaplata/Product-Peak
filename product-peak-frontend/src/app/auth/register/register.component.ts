@@ -30,6 +30,7 @@ export class RegisterComponent {
   @Input() register: any;
   @Output() closeEmit = new EventEmitter<void>();
   @Output() openLoginModal = new EventEmitter<void>();
+  @Output() registerSuccess = new EventEmitter<void>();
   isVisibleRegister: boolean = false;
 
   constructor(
@@ -49,23 +50,25 @@ export class RegisterComponent {
 
   async onSubmit() {
     if (this.registerForm.valid) {
-      try{
-        const response = await this.usersService.register(this.registerForm.value)
-        if(response.success)
+      try {
+        const response = await this.usersService.register(this.registerForm.value);
+        if (response.success) {
           this.messageService.add({ severity: 'success', summary: 'Successful registration', detail: 'You already have your account' });
-          this.registerForm.reset()
-      }catch(error){
+          this.registerForm.reset();
+          this.registerSuccess.emit()
+
+        }
+      } catch(error) {
         if (error instanceof HttpErrorResponse) {
-          console.log(error.error)
+          console.log(error.error);
           this.messageService.add({ severity: 'warn', summary: 'Warning ', detail: error.error.message });
         } else {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: "Unknown error" });
         }
-        
       }
-
     }
   }
+
 
   openModal() {
     this.isVisibleRegister = true;

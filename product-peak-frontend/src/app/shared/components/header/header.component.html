@@ -62,8 +62,9 @@
 >
   <app-register
   [register]="registerSelected"
-  [visibleRegister]=" visibleSignUp"
+  [visibleRegister]="visibleSignUp"
   (closeEmit)="onCloseModalRegister()"
+  (registerSuccess)="handleRegisterSuccess()"
   ></app-register>
 </p-dialog>
 
