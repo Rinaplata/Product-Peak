@@ -4,6 +4,11 @@ import { CardModule } from 'primeng/card';
 import { ContextMenu, ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
 import { RippleModule } from 'primeng/ripple';
+import { TopRatedProductsComponent } from '../top-rated-products/top-rated-products.component';
+import { PublishedProductsComponent } from '../published-products/published-products.component';
+import { PanelModule } from 'primeng/panel';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 
 interface Product {
   image: string;
@@ -17,7 +22,7 @@ interface Product {
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [ CommonModule, CardModule, ContextMenuModule, RippleModule],
+  imports: [ CommonModule, CardModule, ContextMenuModule, RippleModule, TopRatedProductsComponent, PublishedProductsComponent, PanelModule, AvatarModule, BadgeModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })

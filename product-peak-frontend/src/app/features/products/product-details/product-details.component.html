@@ -1,64 +1,72 @@
+<div class="container">
+  <div class="title-content">
+    <h2 class="text-f20 font-bold mb-3 text-left text-gray-900">
+      In case you missed it
+    </h2>
+  </div>
 
- <div class="title-content">
-  <h2 class="text-f20 font-bold mb-3 text-left text-gray-900">
-    In case you missed it
-  </h2>
-</div>
-
-<p-card>
-  <div class="details-content">
-    <div
-      class="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6"
-    >
-      <div class="flex w-full">
-        <ul class="w-full">
-          <li
-            *ngFor="let product of products"
-            class="p-2 hover:surface-hover border-round border-1 border-transparent transition-all transition-duration-200"
-            (contextmenu)="onContextMenu($event, product)"
-          >
-            <div class="flex flex-wrap p-2 align-items-center gap-3">
-              <img
-              class="w-4rem flex-shrink-0 border-round"
-              [src]="product.image"
-              [alt]="product.title"
-            />
-              <div class="flex-1 flex flex-column gap-1">
-                <span class="font-bold">
-                  {{ product.title }}
-                </span>
-                <div class="flex align-items-center gap-2">
-                  <span>
-                    {{ product.description }}
+  <div class="content">
+    <div class="details-content">
+      <p-card>
+        <div
+          class="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6"
+        >
+          <div class="flex w-full">
+            <ul class="w-full">
+              <li
+                *ngFor="let product of products"
+                class="p-2 hover:surface-hover border-round border-1 border-transparent transition-all transition-duration-200"
+                (contextmenu)="onContextMenu($event, product)"
+              >
+                <div class="flex flex-wrap p-2 align-items-center gap-3">
+                  <img
+                    class="w-4rem flex-shrink-0 border-round"
+                    [src]="product.image"
+                    [alt]="product.title"
+                  />
+                  <div class="flex-1 flex flex-column gap-1">
+                    <span class="font-bold">{{ product.title }}</span>
+                    <div class="flex align-items-center gap-2">
+                      <span>{{ product.description }}</span>
+                    </div>
+                  </div>
+                  <span class="font-bold text-900 ml-5">
+                    <i class="pi pi-heart" style="font-size: 1rem"></i>
+                    {{ product.likes }}
                   </span>
                 </div>
-              </div>
-              <span class="font-bold text-900 ml-5">
-                <i class="pi pi-heart" style="font-size: 1rem"></i>
-                {{ product.likes }}
-              </span>
-            </div>
-            <div class="ml-2">
-              <h3 class="text-base font-bold text-gray-900">
-                {{ product.title }}
-              </h3>
-              <p class="text-f13 font-normal">
-                <a href="javascript:void(0)">{{ product.description }}</a>
-              </p>
-              <div>
-                <span
-                  class="inline-flex items-center mt-3 border border-grey-100 rounded pl-2 pb-1 pt-1 pr-2"
-                >
-                  <i class="pi pi-comments" style="font-size: 1rem"></i>
-                  <p class="text-f11 uppercase ml-1 font-medium">
-                    {{ product.comments }}
+                <div class="ml-2">
+                  <h3 class="text-base font-bold text-gray-900">
+                    {{ product.title }}
+                  </h3>
+                  <p class="text-f13 font-normal">
+                    <a href="javascript:void(0)">{{ product.description }}</a>
                   </p>
-                </span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+                  <div>
+                    <span
+                      class="inline-flex items-center mt-3 border border-grey-100 rounded pl-2 pb-1 pt-1 pr-2"
+                    >
+                      <i class="pi pi-comments" style="font-size: 1rem"></i>
+                      <p class="text-f11 uppercase ml-1 font-medium">
+                        {{ product.comments }}
+                      </p>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </p-card>
     </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <app-published-products></app-published-products>
+      </div>
+      <div class="sidebar-card">
+        <app-top-rated-products></app-top-rated-products>
+      </div>
+    </aside>
   </div>
-</p-card>
+</div>
