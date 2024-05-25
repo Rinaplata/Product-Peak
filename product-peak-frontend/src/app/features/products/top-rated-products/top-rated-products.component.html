@@ -1,7 +1,7 @@
-<div class="published-products">
-  <h3>Published Products</h3>
+<div class="top-rated-products">
+  <h3>Top Rated Products</h3>
   <ul>
-    <li *ngFor="let product of publishedProducts">
+    <li *ngFor="let product of topRatedProducts">
       <img [src]="product.image" [alt]="product.title">
       <div>
         <h4>{{ product.title }}</h4>
@@ -10,3 +10,4 @@
     </li>
   </ul>
 </div>
+

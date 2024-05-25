@@ -1,5 +1,19 @@
 @import "primeicons/primeicons.css";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1070px;
+  padding: 15px 0;
+  margin: 0 auto;
+  display: flex;
+}
+
+.content {
+  display: flex;
+  gap: 16px;
+}
+
 .details-content {
   width: 1070px;
   padding: 60px 0;
