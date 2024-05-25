@@ -1,12 +1,10 @@
-import { Component, ViewChild, input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from '../../../auth/login/login.component';
 import { DialogModule } from 'primeng/dialog';
 import { Dialog } from 'primeng/dialog';
 import { RegisterComponent } from '../../../auth/register/register.component';
-
-
 
 @Component({
   selector: 'app-header',
@@ -33,7 +31,7 @@ export class HeaderComponent {
 
   showDialogRegister() {
     this.visibleModal = true;
-}
+  }
 
   onCloseModalLogin(){
     this.visibleLogin = false;
@@ -51,5 +49,9 @@ export class HeaderComponent {
   openModalRegister(registerSelected: any){
     this.registerSelected = registerSelected;
     this.visibleSignUp = true;
+  }
+
+  handleRegisterSuccess() {
+    this.visibleModal = false;
   }
 }

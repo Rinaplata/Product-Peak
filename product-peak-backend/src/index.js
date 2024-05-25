@@ -11,7 +11,7 @@ app.use(cors());
 // se usa para leer el archivo .env
 const dotenv = require("dotenv");
 dotenv.config();
-const PORT = Number.parseInt(process.env.PORT || "3000");
+const PORT = Number.parseInt(process.env.PORT || "4200");
 
 // DB
 
