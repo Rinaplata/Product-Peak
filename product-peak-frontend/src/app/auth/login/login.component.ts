@@ -38,9 +38,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+
   onSubmit() {
     if (this.loginForm.valid) {
-      // Lógica para manejar el envío del formulario de inicio de sesión
     }
   }
 
